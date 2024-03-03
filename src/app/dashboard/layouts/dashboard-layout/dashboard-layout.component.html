@@ -16,8 +16,9 @@
             </div>
           <app-task-popup *ngIf="mostrarPopup" (submit)="guardarTarea($event)" [tareaEdit]="tareaEdit" (close)="cerrarPopup()"></app-task-popup>
           <hr>
-          <div class="d-flex flex-wrap justify-content-between">
-            <div class="form-group col-12">
+
+          <div class="row flex-wrap">
+            <div class="form-group col-md-6 col-sm-12">
               <label for="filtro-prioridad">Filtrar por prioridad:</label>
               <select class="form-control" id="filtro-prioridad" [(ngModel)]="filtros.prioridad" (ngModelChange)="aplicarFiltros()">
                 <option value="">Todas</option>
@@ -26,8 +27,8 @@
                 <option value="alta">Alta</option>
               </select>
             </div>
-            
-            <div class="form-group col-12">
+
+            <div class="form-group col-md-6 col-sm-12">
               <label for="filtro-completada">Filtrar por completada:</label>
               <select class="form-control" id="filtro-completada" [(ngModel)]="filtros.completada" (ngModelChange)="aplicarFiltros()">
                 <option value="">Todas</option>
@@ -37,7 +38,6 @@
             </div>
           </div>
         <hr>
-
         <div style="overflow-x: auto; max-height: 300px;">
           <table class="table table-striped">
             <thead class="thead-dark ">

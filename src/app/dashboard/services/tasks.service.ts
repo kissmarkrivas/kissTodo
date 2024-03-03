@@ -1,33 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { Tasks } from '../interfaces/tasks.interface';
-// import { BehaviorSubject } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class TasksService {
-
-//   private tareasSubject = new BehaviorSubject<Tasks[]>([]);
-
-//   constructor() {
-//     const storedTareas = localStorage.getItem('tareas');
-//     const tareas: Tasks[] = storedTareas ? JSON.parse(storedTareas) : [];
-//     this.tareasSubject.next(tareas);
-//   }
-
-//   obtenerTareas() {
-//     return this.tareasSubject.asObservable();
-//   }
-
-//   agregarTarea(tarea: Tasks) {
-//     const tareas = [...this.tareasSubject.getValue(), tarea];
-//     this.tareasSubject.next(tareas);
-//     localStorage.setItem('tareas', JSON.stringify(tareas));
-//   }
-
-  
-
-// }
 
 import { Injectable } from '@angular/core';
 import { Tasks } from '../interfaces/tasks.interface';
@@ -80,4 +50,5 @@ export class TasksService {
       })
     );
   }
+
 }

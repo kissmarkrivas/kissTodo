@@ -1,24 +1,20 @@
-  import { Component, OnInit } from '@angular/core';
-  import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Tasks } from '../../interfaces/tasks.interface';
 import { TasksService } from '../../services/tasks.service';
 
-  @Component({
-    templateUrl: './dashboard-layout.component.html',
-    styleUrls: ['./dashboard-layout.component.css']
-  })
-  export class DashboardLayoutComponent implements OnInit {
+@Component({
+  templateUrl: './dashboard-layout.component.html',
+  styleUrls: ['./dashboard-layout.component.css']
+})
+export class DashboardLayoutComponent implements OnInit {
 
-    constructor(private tareasService: TasksService) {}
-  
-    ngOnInit() {
-      this.filtrarTareas();
+  constructor(private tareasService: TasksService) {}
 
-      // this.tareasService.obtenerTareas().subscribe(tareas => {
-      //   this.tareas = tareas;
-      // });
-    }
-  
+  ngOnInit() {
+    this.filtrarTareas();
+  }
+
   filtros: { prioridad: string | undefined, completada: string | undefined } = { prioridad:'', completada: '' };
   mostrarPopup = false;
   tareas: Tasks[] = [];
@@ -61,24 +57,25 @@ import { TasksService } from '../../services/tasks.service';
   aplicarFiltros() {
     this.filtrarTareas();
   }
-  
+
   filtrarTareas() {
     let prioridadFiltro = this.filtros.prioridad;
     let completadaFiltro = this.filtros.completada;
-    console.log('',completadaFiltro)
   
     if (!prioridadFiltro && completadaFiltro === '') {
-      // Si no se ha seleccionado ninguna prioridad y completada, obtener todas las tareas sin aplicar ningún filtro
-      this.tareasService.obtenerTareas().subscribe(tareas => {
-        this.tareas = tareas;
-      });
-    } else {
-      // Aplicar el filtro según los parámetros seleccionados
-      this.tareasService.filtrarTareas(prioridadFiltro, completadaFiltro)
-        .subscribe(tareas => {
-          this.tareas = tareas;
+      const obtenerTareasObservable = this.tareasService.obtenerTareas();
+      if (obtenerTareasObservable) {
+        obtenerTareasObservable.subscribe(tareasFiltradas => {
+          this.tareas = tareasFiltradas;
         });
+      }
+    } else {
+      const filtrarTareasObservable = this.tareasService.filtrarTareas(prioridadFiltro, completadaFiltro);
+      if (filtrarTareasObservable) {
+        filtrarTareasObservable.subscribe(tareasFiltradas => {
+          this.tareas = tareasFiltradas;
+        });
+      }
     }
   }
-
 }

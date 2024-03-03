@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit {
 
   private fb            = inject( FormBuilder );
   private authService   = inject( AuthService);
-  private router        = inject( Router )
+  public router        = inject( Router )
 
   public myForm:FormGroup = this.fb.group({
     email   : ['prueba.pass@gmail.com',[Validators.required,Validators.email]],
